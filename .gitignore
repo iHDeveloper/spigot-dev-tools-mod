@@ -1,8 +1,5 @@
-# Servers
-server
-
-# Build Tools
-.build-tools
+# Minecraft
+run
 
 # Intellji Idea
 .idea
