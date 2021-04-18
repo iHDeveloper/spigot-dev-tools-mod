@@ -6,25 +6,19 @@ import io.netty.channel.ChannelFutureListener;
 import me.ihdeveloper.spigot.devtools.mod.command.HelloCommand;
 import me.ihdeveloper.spigot.devtools.mod.listener.RenderListener;
 import me.ihdeveloper.spigot.devtools.mod.netty.ChannelHandler;
-import me.ihdeveloper.spigot.devtools.mod.utils.DrawUtils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.server.S3FPacketCustomPayload;
 import net.minecraftforge.client.ClientCommandHandler;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLEmbeddedChannel;
+import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 import net.minecraftforge.fml.common.network.FMLOutboundHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import net.minecraftforge.fml.relauncher.Side;
 
-import java.awt.Color;
 import java.util.EnumMap;
 
 @Mod(modid = "spigot-dev-tools", version = "0.1")
@@ -37,7 +31,7 @@ public class Main {
 
     private EnumMap<Side, FMLEmbeddedChannel> channels;
 
-    private final Container container = new Container();
+    private Container container = new Container();
 
     @Mod.EventHandler
     public void onInit(FMLInitializationEvent event) {
@@ -45,6 +39,11 @@ public class Main {
         MinecraftForge.EVENT_BUS.register(new RenderListener());
         ClientCommandHandler.instance.registerCommand(new HelloCommand());
         channels = NetworkRegistry.INSTANCE.newChannel("Spigot|DevTools", new ChannelHandler());
+    }
+
+    @Mod.EventHandler
+    public void onDisconnect(FMLNetworkEvent.ClientDisconnectionFromServerEvent event) {
+        container = new Container();
     }
 
     public void sendToServer(byte[] data) {
