@@ -2,7 +2,7 @@
     {
       "modid": "spigot-dev-tools",
       "name": "Spigot Dev Tools",
-      "description": "Provides tools to help Spigot developer understanding the behavior in the game world.",
+      "description": "Provides tools to help Spigot developer understanding the behavior of the game world.",
       "version": "${version}",
       "mcversion": "${mcversion}",
       "url": "https://github.com/iHDeveloper/spigot-dev-tools",
