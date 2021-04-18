@@ -3,6 +3,7 @@ package me.ihdeveloper.spigot.devtools.mod.netty;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import me.ihdeveloper.spigot.devtools.mod.AuthState;
 import me.ihdeveloper.spigot.devtools.mod.Main;
 import me.ihdeveloper.spigot.devtools.mod.utils.Debug;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
@@ -39,8 +40,7 @@ public class ChannelHandler extends SimpleChannelInboundHandler<FMLProxyPacket> 
         }
 
         if (type.equals("hello")) {
-            Main.getInstance().setStatus("Authorized!");
-            Main.getInstance().setStatusColor(Color.GREEN);
+            Main.getInstance().getContainer().setAuthState(AuthState.AUTHORIZED);
         }
     }
 

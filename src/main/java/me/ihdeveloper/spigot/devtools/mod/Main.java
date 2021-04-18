@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import me.ihdeveloper.spigot.devtools.mod.command.HelloCommand;
+import me.ihdeveloper.spigot.devtools.mod.listener.RenderListener;
 import me.ihdeveloper.spigot.devtools.mod.netty.ChannelHandler;
 import me.ihdeveloper.spigot.devtools.mod.utils.DrawUtils;
 import net.minecraft.client.Minecraft;
@@ -34,31 +35,16 @@ public class Main {
         return instance;
     }
 
-    private ScaledResolution scaledResolution;
     private EnumMap<Side, FMLEmbeddedChannel> channels;
 
-    private String status = "Not Authorized!";
-    private Color statusColor = Color.RED;
+    private final Container container = new Container();
 
     @Mod.EventHandler
     public void onInit(FMLInitializationEvent event) {
         instance = this;
-        MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new RenderListener());
         ClientCommandHandler.instance.registerCommand(new HelloCommand());
         channels = NetworkRegistry.INSTANCE.newChannel("Spigot|DevTools", new ChannelHandler());
-    }
-
-    @Mod.EventHandler
-    public void onPostInit(FMLPostInitializationEvent event) {
-        scaledResolution = new ScaledResolution(Minecraft.getMinecraft());
-    }
-
-    @SubscribeEvent
-    public void onRender(RenderGameOverlayEvent.Post event) {
-        if (status != null && (event.type == RenderGameOverlayEvent.ElementType.EXPERIENCE || event.type == RenderGameOverlayEvent.ElementType.JUMPBAR)) {
-            scaledResolution = event.resolution;
-            DrawUtils.drawStatus(this.status);
-        }
     }
 
     public void sendToServer(byte[] data) {
@@ -68,19 +54,8 @@ public class Main {
         channels.get(Side.CLIENT).writeAndFlush(packet).addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public Container getContainer() {
+        return container;
     }
 
-    public void setStatusColor(Color statusColor) {
-        this.statusColor = statusColor;
-    }
-
-    public Color getStatusColor() {
-        return statusColor;
-    }
-
-    public ScaledResolution getScaledResolution() {
-        return scaledResolution;
-    }
 }

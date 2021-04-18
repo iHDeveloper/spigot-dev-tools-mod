@@ -1,5 +1,6 @@
 package me.ihdeveloper.spigot.devtools.mod.command;
 
+import me.ihdeveloper.spigot.devtools.mod.AuthState;
 import me.ihdeveloper.spigot.devtools.mod.Main;
 import me.ihdeveloper.spigot.devtools.mod.utils.Debug;
 import net.minecraft.command.CommandBase;
@@ -43,8 +44,7 @@ public class HelloCommand extends CommandBase {
             return;
         }
 
-        Main.getInstance().setStatus("Authenticating...");
-        Main.getInstance().setStatusColor(Color.YELLOW);
+        Main.getInstance().getContainer().setAuthState(AuthState.WAITING_FOR_RESPONSE);
         sender.addChatMessage(new ChatComponentText("§eSending hello... §7o/"));
         Main.getInstance().sendToServer(stream.toByteArray());
     }
