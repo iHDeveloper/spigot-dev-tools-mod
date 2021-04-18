@@ -52,6 +52,7 @@ public class Main {
         FMLProxyPacket packet = new FMLProxyPacket(new S3FPacketCustomPayload("Spigot|DevTools", new PacketBuffer(buffer)));
         channels.get(Side.CLIENT).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.TOSERVER);
         channels.get(Side.CLIENT).writeAndFlush(packet).addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
+        buffer.release();
     }
 
     public Container getContainer() {
