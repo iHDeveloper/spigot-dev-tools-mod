@@ -12,6 +12,7 @@ import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLEmbeddedChannel;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 import net.minecraftforge.fml.common.network.FMLOutboundHandler;
@@ -36,12 +37,13 @@ public class Main {
     @Mod.EventHandler
     public void onInit(FMLInitializationEvent event) {
         instance = this;
+        MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new RenderListener());
         ClientCommandHandler.instance.registerCommand(new HelloCommand());
         channels = NetworkRegistry.INSTANCE.newChannel("Spigot|DevTools", new ChannelHandler());
     }
 
-    @Mod.EventHandler
+    @SubscribeEvent()
     public void onDisconnect(FMLNetworkEvent.ClientDisconnectionFromServerEvent event) {
         container = new Container();
     }
@@ -51,7 +53,6 @@ public class Main {
         FMLProxyPacket packet = new FMLProxyPacket(new S3FPacketCustomPayload("Spigot|DevTools", new PacketBuffer(buffer)));
         channels.get(Side.CLIENT).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.TOSERVER);
         channels.get(Side.CLIENT).writeAndFlush(packet).addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
-        buffer.release();
     }
 
     public Container getContainer() {
