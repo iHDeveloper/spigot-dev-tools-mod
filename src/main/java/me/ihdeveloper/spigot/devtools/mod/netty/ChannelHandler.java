@@ -29,6 +29,8 @@ public class ChannelHandler extends SimpleChannelInboundHandler<FMLProxyPacket> 
 
             in.close();
         } catch (IOException exception) {
+            Debug.error("Failed to read data! §7(" + exception.getMessage() + ")");
+            Debug.warning("Check the log to view the stacktrace!");
             exception.printStackTrace();
         }
 
@@ -41,6 +43,25 @@ public class ChannelHandler extends SimpleChannelInboundHandler<FMLProxyPacket> 
 
         if (type.equals("hello")) {
             Main.getInstance().getContainer().setAuthState(AuthState.AUTHORIZED);
+        } else if (type.equals("watcher-put")) {
+            try {
+                String key = in.readUTF();
+                String value = in.readUTF();
+                Main.getInstance().getContainer().getWatcher().put(key, value);
+            } catch (IOException exception) {
+                Debug.error("Failed to read watcher data! §7(" + exception.getMessage() + ")");
+                Debug.warning("Check the log to view the stacktrace!");
+                exception.printStackTrace();
+            }
+        } else if (type.equals("watcher-remove")) {
+            try {
+                String key = in.readUTF();
+                Main.getInstance().getContainer().getWatcher().remove(key);
+            } catch (IOException exception) {
+                Debug.error("Failed to read watcher data! §7(" + exception.getMessage() + ")");
+                Debug.warning("Check the log to view the stacktrace!");
+                exception.printStackTrace();
+            }
         }
     }
 

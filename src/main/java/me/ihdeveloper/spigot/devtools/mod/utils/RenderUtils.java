@@ -1,7 +1,6 @@
 package me.ihdeveloper.spigot.devtools.mod.utils;
 
 import me.ihdeveloper.spigot.devtools.mod.AuthState;
-import me.ihdeveloper.spigot.devtools.mod.Main;
 import net.minecraft.client.gui.ScaledResolution;
 
 import java.awt.Color;
