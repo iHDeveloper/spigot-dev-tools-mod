@@ -7,7 +7,6 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 
-import java.awt.Color;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -36,6 +35,8 @@ public class HelloCommand extends CommandBase {
         DataOutputStream out = new DataOutputStream(stream);
         try {
             out.writeUTF("hello");
+            out.writeByte(Main.protocolMajor);
+            out.writeByte(Main.protocolMinor);
             out.close();
         } catch (IOException exception) {
             exception.printStackTrace();

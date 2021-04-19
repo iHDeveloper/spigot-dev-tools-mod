@@ -28,6 +28,9 @@ import java.util.EnumMap;
 
 @Mod(modid = "spigot-dev-tools", version = "0.1")
 public class Main {
+    public static final byte protocolMajor = 0;
+    public static final byte protocolMinor = 1;
+
     private static Main instance;
 
     public static Main getInstance() {
