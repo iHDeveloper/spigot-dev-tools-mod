@@ -6,7 +6,7 @@ public class Container {
 
     private final Watcher watcher = new Watcher();
     private AuthState authState = AuthState.NOT_REQUESTED;
-    private double tps;
+    private double[] recentTPS = new double[3];
 
     public void setAuthState(AuthState authState) {
         this.authState = authState;
@@ -20,12 +20,12 @@ public class Container {
         return watcher;
     }
 
-    public void setTPS(double tps) {
-        this.tps = tps;
+    public void setTPS(int index, double tps) {
+        recentTPS[index] = tps;
     }
 
-    public double getTPS() {
-        return tps;
+    public double getTPS(int index) {
+        return recentTPS[index];
     }
 
 }

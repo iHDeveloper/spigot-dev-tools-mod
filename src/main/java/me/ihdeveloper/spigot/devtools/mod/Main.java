@@ -4,7 +4,9 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import me.ihdeveloper.spigot.devtools.mod.command.HelloCommand;
+import me.ihdeveloper.spigot.devtools.mod.command.TPSCommand;
 import me.ihdeveloper.spigot.devtools.mod.command.WatcherCommand;
+import me.ihdeveloper.spigot.devtools.mod.gui.GUITPS;
 import me.ihdeveloper.spigot.devtools.mod.gui.GUIWatcher;
 import me.ihdeveloper.spigot.devtools.mod.listener.RenderListener;
 import me.ihdeveloper.spigot.devtools.mod.netty.ChannelHandler;
@@ -41,22 +43,34 @@ public class Main {
     private Container container = new Container();
 
     private boolean openWatcherGUI = false;
+    private boolean openTPSGUI = false;
 
     @Mod.EventHandler
     public void onInit(FMLInitializationEvent event) {
         instance = this;
+
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new RenderListener());
+
         ClientCommandHandler.instance.registerCommand(new HelloCommand());
         ClientCommandHandler.instance.registerCommand(new WatcherCommand());
+        ClientCommandHandler.instance.registerCommand(new TPSCommand());
+
         channels = NetworkRegistry.INSTANCE.newChannel("Spigot|DevTools", new ChannelHandler());
     }
 
     @SubscribeEvent()
     public void onTick(TickEvent.ClientTickEvent event) {
-        if (event.phase == TickEvent.Phase.START && openWatcherGUI) {
-            Minecraft.getMinecraft().displayGuiScreen(new GUIWatcher(Main.getInstance().getContainer().getWatcher()));
-            openWatcherGUI = false;
+        if (event.phase == TickEvent.Phase.START) {
+            if (openWatcherGUI) {
+                Minecraft.getMinecraft().displayGuiScreen(new GUIWatcher(container.getWatcher()));
+                openWatcherGUI = false;
+            }
+
+            if (openTPSGUI) {
+                Minecraft.getMinecraft().displayGuiScreen(new GUITPS(container));
+                openTPSGUI = false;
+            }
         }
     }
 
@@ -74,6 +88,10 @@ public class Main {
 
     public void setOpenWatcherGUI(boolean openWatcherGUI) {
         this.openWatcherGUI = openWatcherGUI;
+    }
+
+    public void setOpenTPSGUI(boolean openTPSGUI) {
+        this.openTPSGUI = openTPSGUI;
     }
 
     public Container getContainer() {

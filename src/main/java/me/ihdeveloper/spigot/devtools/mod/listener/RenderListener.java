@@ -13,7 +13,7 @@ public class RenderListener {
         if (event.type == RenderGameOverlayEvent.ElementType.EXPERIENCE) {
             Container container = Main.getInstance().getContainer();
             RenderUtils.renderAuthStatus(event.resolution, container.getAuthState());
-            RenderUtils.renderTPS(event.resolution, container.getTPS());
+            RenderUtils.renderTPS(event.resolution, container.getTPS(0));
         }
     }
 
