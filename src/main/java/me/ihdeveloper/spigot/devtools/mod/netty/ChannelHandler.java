@@ -62,6 +62,15 @@ public class ChannelHandler extends SimpleChannelInboundHandler<FMLProxyPacket> 
                 Debug.warning("Check the log to view the stacktrace!");
                 exception.printStackTrace();
             }
+        } else if (type.equals("tps")) {
+            try {
+                double tps = in.readDouble();
+                Main.getInstance().getContainer().setTPS(tps);
+            } catch (IOException exception) {
+                Debug.error("Failed to read TPS data! §7(" + exception.getMessage() + ")");
+                Debug.warning("Check the log to view the stacktrace!");
+                exception.printStackTrace();
+            }
         }
     }
 

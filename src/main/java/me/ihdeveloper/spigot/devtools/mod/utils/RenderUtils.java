@@ -28,7 +28,30 @@ public class RenderUtils {
             color = Color.BLACK;
         }
 
-        DrawUtils.drawCenteredText(status, (width * 2f) - 100f, height - 20f, color.getRGB());
+        DrawUtils.drawCenteredText(status, (width * 2f) - 100f, height - 40f, color.getRGB());
+    }
+
+    public static void renderTPS(ScaledResolution scaledResolution, double tps) {
+        int height = scaledResolution.getScaledHeight();
+        int width = scaledResolution.getScaledWidth();
+
+        char prefix;
+        double fixedTPS = Math.min((double)Math.round(tps * 100.0D) / 100.0D, 20.0D);
+
+        if (fixedTPS >= 18.0D)
+            prefix = 'f';
+        else if (fixedTPS >= 16.0D)
+            prefix = 'e';
+        else
+            prefix = 'c';
+
+        StringBuilder builder = new StringBuilder();
+        builder.append(prefix);
+        if (tps > 20.0D)
+            builder.append('*');
+        builder.append(fixedTPS);
+
+        DrawUtils.drawCenteredText("§eTPS: §" + builder.toString(), (width * 2f) - 100f, height - 20f, Color.WHITE.getRGB());
     }
 
 }
