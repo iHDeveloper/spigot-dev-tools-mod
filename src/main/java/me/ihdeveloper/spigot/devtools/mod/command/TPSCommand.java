@@ -1,5 +1,6 @@
 package me.ihdeveloper.spigot.devtools.mod.command;
 
+import me.ihdeveloper.spigot.devtools.mod.GUIType;
 import me.ihdeveloper.spigot.devtools.mod.Main;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
@@ -24,6 +25,6 @@ public class TPSCommand extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
-        Main.getInstance().setOpenTPSGUI(true);
+        Main.getInstance().syncOpenGUI(GUIType.TPS);
     }
 }

@@ -1,5 +1,6 @@
 package me.ihdeveloper.spigot.devtools.mod.command;
 
+import me.ihdeveloper.spigot.devtools.mod.GUIType;
 import me.ihdeveloper.spigot.devtools.mod.Main;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
@@ -23,7 +24,7 @@ public class WatcherCommand extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender sender, String[] args) {
-        Main.getInstance().setOpenWatcherGUI(true);
+        Main.getInstance().syncOpenGUI(GUIType.WATCHER);
     }
 
 }
