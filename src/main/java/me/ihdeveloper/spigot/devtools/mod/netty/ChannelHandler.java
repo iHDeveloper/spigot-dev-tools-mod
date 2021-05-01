@@ -5,6 +5,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import me.ihdeveloper.spigot.devtools.mod.AuthState;
 import me.ihdeveloper.spigot.devtools.mod.Main;
+import me.ihdeveloper.spigot.devtools.mod.Profiler;
 import me.ihdeveloper.spigot.devtools.mod.utils.Debug;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 
@@ -33,8 +34,6 @@ public class ChannelHandler extends SimpleChannelInboundHandler<FMLProxyPacket> 
             Debug.warning("Check the log to view the stacktrace!");
             exception.printStackTrace();
         }
-
-        Debug.info("Inbound Message: " + type);
 
         if (type == null) {
             Debug.warning("Empty message! §cThat's weird...");
@@ -68,6 +67,22 @@ public class ChannelHandler extends SimpleChannelInboundHandler<FMLProxyPacket> 
                     Main.getInstance().getContainer().setTPS(i, in.readDouble());
             } catch (IOException exception) {
                 Debug.error("Failed to read TPS data! §7(" + exception.getMessage() + ")");
+                Debug.warning("Check the log to view the stacktrace!");
+                exception.printStackTrace();
+            }
+        } else if (type.equals("profiler")) {
+            try {
+                int length = in.readInt();
+                for (int i = 0; i < length; i++) {
+                    String name = in.readUTF();
+
+                    Profiler.Item item = Main.getInstance().getContainer().getProfiler().get(name);
+                    item.setUpdated(in.readBoolean());
+                    item.setTicks(in.readLong());
+                    item.setPercent(in.readDouble());
+                }
+            } catch (IOException exception) {
+                Debug.error("Failed to read Profiler data! §7(" + exception.getMessage() + ")");
                 Debug.warning("Check the log to view the stacktrace!");
                 exception.printStackTrace();
             }

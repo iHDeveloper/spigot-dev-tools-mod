@@ -3,9 +3,11 @@ package me.ihdeveloper.spigot.devtools.mod.listener;
 import me.ihdeveloper.spigot.devtools.mod.Container;
 import me.ihdeveloper.spigot.devtools.mod.GUIType;
 import me.ihdeveloper.spigot.devtools.mod.Main;
+import me.ihdeveloper.spigot.devtools.mod.gui.GUIProfiler;
 import me.ihdeveloper.spigot.devtools.mod.gui.GUITPS;
 import me.ihdeveloper.spigot.devtools.mod.gui.GUIWatcher;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -24,12 +26,21 @@ public class GUIListener {
         if (event.phase == TickEvent.Phase.START) {
             Container container = Main.getInstance().getContainer();
 
+            GuiScreen screen = null;
             if (open.contains(GUIType.WATCHER)) {
-                Minecraft.getMinecraft().displayGuiScreen(new GUIWatcher(container.getWatcher()));
+                screen = new GUIWatcher(container.getWatcher());
             }
 
             if (open.contains(GUIType.TPS)) {
-                Minecraft.getMinecraft().displayGuiScreen(new GUITPS(container));
+                screen = new GUITPS(container);
+            }
+
+            if (open.contains(GUIType.PROFILER)) {
+                screen = new GUIProfiler(container.getProfiler());
+            }
+
+            if (screen != null) {
+                Minecraft.getMinecraft().displayGuiScreen(screen);
             }
 
             open.clear();
