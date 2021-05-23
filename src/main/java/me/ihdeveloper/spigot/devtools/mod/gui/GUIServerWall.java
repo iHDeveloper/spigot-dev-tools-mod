@@ -20,6 +20,7 @@ public class GUIServerWall extends GUIOverlay {
         beforeDrawScreen();
 
         drawTitle("§eServer Wall");
+        drawDescription("§7Global Information about the server");
         drawTable();
         drawBox("§e§lName", "§e§lValue", true);
 

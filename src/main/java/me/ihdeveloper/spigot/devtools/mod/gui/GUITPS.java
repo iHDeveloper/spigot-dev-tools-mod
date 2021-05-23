@@ -17,6 +17,7 @@ public class GUITPS extends GUIOverlay {
         beforeDrawScreen();
 
         drawTitle("§eTPS");
+        drawDescription("§7Overview of the ticks per second in the server");
         drawTable();
 
         int x = tableWidth / 2;

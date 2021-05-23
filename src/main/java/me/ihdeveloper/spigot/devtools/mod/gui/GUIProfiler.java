@@ -36,6 +36,7 @@ public class GUIProfiler extends GUIOverlay {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         beforeDrawScreen();
         drawTitle("§6Profiler");
+        drawDescription("§7Provide an overview of the performance of certain operations");
         drawTable();
 
         String header = "§7§oTotal: " + profiler.getTotalTicks() + " ticks (" + profiler.getTotalMilliseconds() + " ms)";

@@ -21,7 +21,13 @@ public abstract class GUIOverlay extends GuiScreen {
     protected void drawTitle(String title) {
         GlStateManager.pushMatrix();
         GlStateManager.scale(3f, 3f, 3f);
-        DrawUtils.drawCenteredText(title, width / 3F, (height / 16f) / 3f, Color.WHITE.getRGB(), true);
+        DrawUtils.drawCenteredText(title, width / 3F, ((height / 16f) / 3f) - 2, Color.WHITE.getRGB(), true);
+        GlStateManager.popMatrix();
+    }
+
+    protected void drawDescription(String description) {
+        GlStateManager.pushMatrix();
+        DrawUtils.drawCenteredText(description, width, (height / 8f) + 7, Color.WHITE.getRGB(), true);
         GlStateManager.popMatrix();
     }
 

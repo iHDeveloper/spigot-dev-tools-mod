@@ -28,6 +28,7 @@ public class GUIWatcher extends GUIOverlay {
         beforeDrawScreen();
 
         drawTitle("§eWatcher");
+        drawDescription("§7Read-Only Table to watch multiple values");
         drawTable();
         drawBox("§e§lKey", "§e§lValue", true);
 
