@@ -1,42 +1,34 @@
 package me.ihdeveloper.spigot.devtools.mod.gui;
 
 import me.ihdeveloper.spigot.devtools.mod.GUIOverlay;
-import me.ihdeveloper.spigot.devtools.mod.tool.Watcher;
+import me.ihdeveloper.spigot.devtools.mod.tool.ServerWall;
 import me.ihdeveloper.spigot.devtools.mod.utils.DrawUtils;
 
 import java.util.Map;
 
-public class GUIWatcher extends GUIOverlay {
+public class GUIServerWall extends GUIOverlay {
 
-    private final Watcher watcher;
+    private final ServerWall wall;
 
-    public GUIWatcher(Watcher watcher) {
+    public GUIServerWall(ServerWall wall) {
         super();
-        this.watcher = watcher;
-    }
-
-    @Override
-    public void initGui() {
-    }
-
-    @Override
-    public void updateScreen() {
+        this.wall = wall;
     }
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         beforeDrawScreen();
 
-        drawTitle("§eWatcher");
+        drawTitle("§eServer Wall");
         drawTable();
-        drawBox("§e§lKey", "§e§lValue", true);
+        drawBox("§e§lName", "§e§lValue", true);
 
-        if (watcher == null) {
+        if (wall == null) {
             return;
         }
 
         tableY += 10;
-        for (Map.Entry<String, String> entry : watcher.entrySet()) {
+        for (Map.Entry<String, String> entry : wall.all()) {
             drawBox("§e" + entry.getKey(), entry.getValue(), false);
             tableY += 25;
         }

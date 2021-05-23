@@ -5,6 +5,7 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import me.ihdeveloper.spigot.devtools.mod.command.HelloCommand;
 import me.ihdeveloper.spigot.devtools.mod.command.ProfilerCommand;
+import me.ihdeveloper.spigot.devtools.mod.command.ServerWallCommand;
 import me.ihdeveloper.spigot.devtools.mod.command.TPSCommand;
 import me.ihdeveloper.spigot.devtools.mod.command.WatcherCommand;
 import me.ihdeveloper.spigot.devtools.mod.listener.GUIListener;
@@ -37,10 +38,10 @@ public class Main {
         return instance;
     }
 
+    private final GUIListener guiListener = new GUIListener();
+
     private EnumMap<Side, FMLEmbeddedChannel> channels;
     private Container container = new Container();
-
-    private GUIListener guiListener = new GUIListener();
 
     @Mod.EventHandler
     public void onInit(FMLInitializationEvent event) {
@@ -54,6 +55,7 @@ public class Main {
         ClientCommandHandler.instance.registerCommand(new WatcherCommand());
         ClientCommandHandler.instance.registerCommand(new TPSCommand());
         ClientCommandHandler.instance.registerCommand(new ProfilerCommand());
+        ClientCommandHandler.instance.registerCommand(new ServerWallCommand());
 
         channels = NetworkRegistry.INSTANCE.newChannel("Spigot|DevTools", new ChannelHandler());
     }

@@ -1,7 +1,7 @@
 package me.ihdeveloper.spigot.devtools.mod.gui;
 
 import me.ihdeveloper.spigot.devtools.mod.GUIOverlay;
-import me.ihdeveloper.spigot.devtools.mod.Profiler;
+import me.ihdeveloper.spigot.devtools.mod.tool.Profiler;
 import me.ihdeveloper.spigot.devtools.mod.utils.DrawUtils;
 
 import java.util.ArrayList;

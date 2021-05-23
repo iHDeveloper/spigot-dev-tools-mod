@@ -3,5 +3,6 @@ package me.ihdeveloper.spigot.devtools.mod;
 public enum GUIType {
     WATCHER,
     TPS,
-    PROFILER;
+    PROFILER,
+    SERVER_WALL;
 }

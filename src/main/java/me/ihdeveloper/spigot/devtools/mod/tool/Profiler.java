@@ -1,4 +1,4 @@
-package me.ihdeveloper.spigot.devtools.mod;
+package me.ihdeveloper.spigot.devtools.mod.tool;
 
 import java.util.Collection;
 import java.util.Map;

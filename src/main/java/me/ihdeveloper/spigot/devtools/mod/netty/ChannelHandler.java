@@ -5,11 +5,10 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import me.ihdeveloper.spigot.devtools.mod.AuthState;
 import me.ihdeveloper.spigot.devtools.mod.Main;
-import me.ihdeveloper.spigot.devtools.mod.Profiler;
+import me.ihdeveloper.spigot.devtools.mod.tool.Profiler;
 import me.ihdeveloper.spigot.devtools.mod.utils.Debug;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 
-import java.awt.Color;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -86,10 +85,34 @@ public class ChannelHandler extends SimpleChannelInboundHandler<FMLProxyPacket> 
                     item.setPercent(in.readDouble());
                 }
             } catch (IOException exception) {
-                Debug.error("Failed to read Profiler data! §7(" + exception.getMessage() + ")");
+                Debug.error("Failed to read profiler data! §7(" + exception.getMessage() + ")");
                 Debug.warning("Check the log to view the stacktrace!");
                 exception.printStackTrace();
             }
+        } else if (type.equals("server-wall–put")) {
+            try {
+                int length = in.readInt();
+                for (int i = 0; i < length; i++) {
+                    String name = in.readUTF();
+                    String value = in.readUTF();
+                    Main.getInstance().getContainer().getServerWall().put(name, value);
+                }
+            } catch (IOException exception) {
+                Debug.error("Failed to read server wall(put) data! §7(" + exception.getMessage() + ")");
+                Debug.warning("Check the log to view the stacktrace!");
+                exception.printStackTrace();
+            }
+        } else if (type.equals("server-wall-remove")) {
+            try {
+                String name = in.readUTF();
+                Main.getInstance().getContainer().getServerWall().remove(name);
+            } catch (IOException exception) {
+                Debug.error("Failed to read server wall(remove) data! §7(" + exception.getMessage() + ")");
+                Debug.warning("Check the log to view the stacktrace!");
+                exception.printStackTrace();
+            }
+        } else if (type.equals("server-wall-clear")) {
+            Main.getInstance().getContainer().getServerWall().clear();
         }
     }
 

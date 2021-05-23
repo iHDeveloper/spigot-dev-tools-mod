@@ -4,6 +4,7 @@ import me.ihdeveloper.spigot.devtools.mod.Container;
 import me.ihdeveloper.spigot.devtools.mod.GUIType;
 import me.ihdeveloper.spigot.devtools.mod.Main;
 import me.ihdeveloper.spigot.devtools.mod.gui.GUIProfiler;
+import me.ihdeveloper.spigot.devtools.mod.gui.GUIServerWall;
 import me.ihdeveloper.spigot.devtools.mod.gui.GUITPS;
 import me.ihdeveloper.spigot.devtools.mod.gui.GUIWatcher;
 import net.minecraft.client.Minecraft;
@@ -15,7 +16,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class GUIListener {
-    private Set<GUIType> open = new TreeSet<>();
+    private final Set<GUIType> open = new TreeSet<>();
 
     public void openGUI(GUIType type) {
         open.add(type);
@@ -37,6 +38,10 @@ public class GUIListener {
 
             if (open.contains(GUIType.PROFILER)) {
                 screen = new GUIProfiler(container.getProfiler());
+            }
+
+            if (open.contains(GUIType.SERVER_WALL)) {
+                screen = new GUIServerWall(container.getServerWall());
             }
 
             if (screen != null) {
