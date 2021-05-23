@@ -7,6 +7,8 @@ import java.util.TreeMap;
 public class Profiler {
 
     private Map<String, Item> items = new TreeMap<>();
+    private long totalTicks;
+    private long totalMilliseconds;
 
     public Item get(String name) {
         return items.computeIfAbsent(name, (key) -> new Item(name));
@@ -16,10 +18,27 @@ public class Profiler {
         return items.values();
     }
 
+    public void setTotalTicks(long totalTicks) {
+        this.totalTicks = totalTicks;
+    }
+
+    public long getTotalTicks() {
+        return totalTicks;
+    }
+
+    public void setTotalMilliseconds(long totalMilliseconds) {
+        this.totalMilliseconds = totalMilliseconds;
+    }
+
+    public long getTotalMilliseconds() {
+        return totalMilliseconds;
+    }
+
     public static class Item {
         private final String name;
         private boolean updated;
         private long ticks;
+        private long milliseconds;
         private double percent;
 
         public Item(String name) {
@@ -44,6 +63,14 @@ public class Profiler {
 
         public long getTicks() {
             return ticks;
+        }
+
+        public void setMilliseconds(long milliseconds) {
+            this.milliseconds = milliseconds;
+        }
+
+        public long getMilliseconds() {
+            return milliseconds;
         }
 
         public void setPercent(double percent) {

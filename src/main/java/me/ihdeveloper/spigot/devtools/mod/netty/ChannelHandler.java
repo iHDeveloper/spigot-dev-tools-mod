@@ -72,13 +72,17 @@ public class ChannelHandler extends SimpleChannelInboundHandler<FMLProxyPacket> 
             }
         } else if (type.equals("profiler")) {
             try {
+                Profiler profiler = Main.getInstance().getContainer().getProfiler();
                 int length = in.readInt();
+                profiler.setTotalTicks(in.readLong());
+                profiler.setTotalMilliseconds(in.readLong());
                 for (int i = 0; i < length; i++) {
                     String name = in.readUTF();
 
-                    Profiler.Item item = Main.getInstance().getContainer().getProfiler().get(name);
+                    Profiler.Item item = profiler.get(name);
                     item.setUpdated(in.readBoolean());
                     item.setTicks(in.readLong());
+                    item.setMilliseconds(in.readLong());
                     item.setPercent(in.readDouble());
                 }
             } catch (IOException exception) {
