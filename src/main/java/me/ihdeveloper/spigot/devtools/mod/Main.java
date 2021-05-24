@@ -27,7 +27,7 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.EnumMap;
 
-@Mod(modid = "spigot-dev-tools", version = "0.2")
+@Mod(modid = "spigot-dev-tools", version = "0.2.1")
 public class Main {
     public static final byte protocolMajor = 0;
     public static final byte protocolMinor = 2;
