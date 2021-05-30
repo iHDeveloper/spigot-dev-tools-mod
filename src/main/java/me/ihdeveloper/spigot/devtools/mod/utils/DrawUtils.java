@@ -19,8 +19,9 @@ public class DrawUtils {
 
     public static void drawCenteredText(String text, float x, float y, int color, boolean dropShadow) {
         int textWidth = Minecraft.getMinecraft().fontRendererObj.getStringWidth(text);
+        textWidth /= 2;
 
-        Minecraft.getMinecraft().fontRendererObj.drawString(text, (x - textWidth) / 2f, y, color, dropShadow);
+        Minecraft.getMinecraft().fontRendererObj.drawString(text, (x - textWidth), y, color, dropShadow);
     }
 
 }

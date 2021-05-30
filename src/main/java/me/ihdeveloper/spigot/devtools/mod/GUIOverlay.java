@@ -22,13 +22,13 @@ public abstract class GUIOverlay extends GuiScreen {
     protected void drawTitle(String title) {
         GlStateManager.pushMatrix();
         GlStateManager.scale(3f, 3f, 3f);
-        DrawUtils.drawCenteredText(title, width / 3F, ((height / 16f) / 3f) - 2, Color.WHITE.getRGB(), true);
+        DrawUtils.drawCenteredText(title, (width / 2F) / 3F, ((height / 16f) / 3f) - 2, Color.WHITE.getRGB(), true);
         GlStateManager.popMatrix();
     }
 
     protected void drawDescription(String description) {
         GlStateManager.pushMatrix();
-        DrawUtils.drawCenteredText(description, width, (height / 8f) + 7, Color.WHITE.getRGB(), true);
+        DrawUtils.drawCenteredText(description, width / 2F, (height / 8f) + 7, Color.WHITE.getRGB(), true);
         GlStateManager.popMatrix();
     }
 
@@ -39,7 +39,7 @@ public abstract class GUIOverlay extends GuiScreen {
         int bottom = height - (height / 32) - TABLE_MARGIN_BOTTOM;
         drawRect(10, top, width - 10, bottom, DrawUtils.colorFromRGBA(0f, 0f, 0f, .4f));
 
-        DrawUtils.drawCenteredText("§eSpigot Dev Tools §6By §c@iHDeveloper", width, bottom + (TABLE_MARGIN_BOTTOM / 2F), DrawUtils.colorFromRGBA(0, 0, 0, 1));
+        DrawUtils.drawCenteredText("§eSpigot Dev Tools §6By §c@iHDeveloper", width / 2F, bottom + (TABLE_MARGIN_BOTTOM / 2F), DrawUtils.colorFromRGBA(0, 0, 0, 1));
 
         this.tableX = left;
         this.tableY = top;
