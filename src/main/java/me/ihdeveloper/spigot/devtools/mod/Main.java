@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import me.ihdeveloper.spigot.devtools.mod.command.HelloCommand;
+import me.ihdeveloper.spigot.devtools.mod.command.LoggerCommand;
 import me.ihdeveloper.spigot.devtools.mod.command.ProfilerCommand;
 import me.ihdeveloper.spigot.devtools.mod.command.ServerWallCommand;
 import me.ihdeveloper.spigot.devtools.mod.command.TPSCommand;
@@ -56,6 +57,7 @@ public class Main {
         ClientCommandHandler.instance.registerCommand(new TPSCommand());
         ClientCommandHandler.instance.registerCommand(new ProfilerCommand());
         ClientCommandHandler.instance.registerCommand(new ServerWallCommand());
+        ClientCommandHandler.instance.registerCommand(new LoggerCommand());
 
         channels = NetworkRegistry.INSTANCE.newChannel("Spigot|DevTools", new ChannelHandler());
     }

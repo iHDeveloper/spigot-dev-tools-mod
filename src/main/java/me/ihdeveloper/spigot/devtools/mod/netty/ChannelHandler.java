@@ -5,6 +5,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import me.ihdeveloper.spigot.devtools.mod.AuthState;
 import me.ihdeveloper.spigot.devtools.mod.Main;
+import me.ihdeveloper.spigot.devtools.mod.tool.Logger;
 import me.ihdeveloper.spigot.devtools.mod.tool.Profiler;
 import me.ihdeveloper.spigot.devtools.mod.utils.Debug;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
@@ -124,6 +125,19 @@ public class ChannelHandler extends SimpleChannelInboundHandler<FMLProxyPacket> 
             }
         } else if (type.equals("server-wall-clear")) {
             Main.getInstance().getContainer().getServerWall().clear();
+        } else if (type.equals("logger-chunk")) {
+            try {
+                int length = in.readInt();
+
+                Logger logger = Main.getInstance().getContainer().getLogger();
+                for (int i = 0; i < length; i++) {
+                    logger.add(in.readByte(), in.readUTF());
+                }
+            } catch (IOException exception) {
+                Debug.error("Failed to read logger(chunck) data! §7(" + exception.getMessage() + ")");
+                Debug.warning("Check the log to view the stacktrace!");
+                exception.printStackTrace();
+            }
         }
     }
 

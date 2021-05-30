@@ -3,6 +3,7 @@ package me.ihdeveloper.spigot.devtools.mod.listener;
 import me.ihdeveloper.spigot.devtools.mod.Container;
 import me.ihdeveloper.spigot.devtools.mod.GUIType;
 import me.ihdeveloper.spigot.devtools.mod.Main;
+import me.ihdeveloper.spigot.devtools.mod.gui.GUILogger;
 import me.ihdeveloper.spigot.devtools.mod.gui.GUIProfiler;
 import me.ihdeveloper.spigot.devtools.mod.gui.GUIServerWall;
 import me.ihdeveloper.spigot.devtools.mod.gui.GUITPS;
@@ -28,21 +29,17 @@ public class GUIListener {
             Container container = Main.getInstance().getContainer();
 
             GuiScreen screen = null;
-            if (open.contains(GUIType.WATCHER)) {
+
+            if (open.contains(GUIType.WATCHER))
                 screen = new GUIWatcher(container.getWatcher());
-            }
-
-            if (open.contains(GUIType.TPS)) {
+            if (open.contains(GUIType.TPS))
                 screen = new GUITPS(container);
-            }
-
-            if (open.contains(GUIType.PROFILER)) {
+            if (open.contains(GUIType.PROFILER))
                 screen = new GUIProfiler(container.getProfiler());
-            }
-
-            if (open.contains(GUIType.SERVER_WALL)) {
+            if (open.contains(GUIType.SERVER_WALL))
                 screen = new GUIServerWall(container.getServerWall());
-            }
+            if (open.contains(GUIType.LOGGER))
+                screen = new GUILogger(container.getLogger());
 
             if (screen != null) {
                 Minecraft.getMinecraft().displayGuiScreen(screen);

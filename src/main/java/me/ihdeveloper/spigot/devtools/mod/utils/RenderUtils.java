@@ -29,7 +29,7 @@ public class RenderUtils {
             color = Color.BLACK;
         }
 
-        DrawUtils.drawCenteredText(status, (width * 2f) - 100f, height - 40f, color.getRGB());
+        DrawUtils.drawCenteredText(status, width - 50f, height - 40f, color.getRGB());
     }
 
     public static void renderDiscovery(ScaledResolution scaledResolution, boolean discovered, byte major, byte minor) {
@@ -44,7 +44,7 @@ public class RenderUtils {
             status = "§4Not Discovered";
         }
 
-        DrawUtils.drawCenteredText(status, (width * 2f) - 100f, height - 20f, DrawUtils.colorFromRGBA(0, 0, 0, 1));
+        DrawUtils.drawCenteredText(status, width - 50f, height - 20f, DrawUtils.colorFromRGBA(0, 0, 0, 1));
     }
 
     public static void renderTPS(ScaledResolution scaledResolution, double tps) {
@@ -67,7 +67,7 @@ public class RenderUtils {
             builder.append('*');
         builder.append(fixedTPS);
 
-        DrawUtils.drawCenteredText("§eTPS: §" + builder.toString(), (width * 2f) - 100f, height - 20f, Color.WHITE.getRGB());
+        DrawUtils.drawCenteredText("§eTPS: §" + builder.toString(), width - 50f, height - 20f, Color.WHITE.getRGB());
     }
 
 }

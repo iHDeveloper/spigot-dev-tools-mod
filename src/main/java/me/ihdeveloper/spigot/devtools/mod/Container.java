@@ -1,14 +1,18 @@
 package me.ihdeveloper.spigot.devtools.mod;
 
+import me.ihdeveloper.spigot.devtools.mod.tool.Logger;
 import me.ihdeveloper.spigot.devtools.mod.tool.Profiler;
 import me.ihdeveloper.spigot.devtools.mod.tool.ServerWall;
 import me.ihdeveloper.spigot.devtools.mod.tool.Watcher;
+
+import java.util.LinkedList;
 
 public class Container {
 
     private final Watcher watcher = new Watcher();
     private final Profiler profiler = new Profiler();
     private final ServerWall serverWall = new ServerWall();
+    private final Logger logger = new Logger();
     private final double[] recentTPS = new double[3];
     private AuthState authState = AuthState.NOT_REQUESTED;
     private boolean discovered = false;
@@ -33,6 +37,10 @@ public class Container {
 
     public ServerWall getServerWall() {
         return serverWall;
+    }
+
+    public Logger getLogger() {
+        return logger;
     }
 
     public void setTPS(int index, double tps) {

@@ -20,7 +20,7 @@ public class GUITPS extends GUIOverlay {
         drawDescription("§7Overview of the ticks per second in the server");
         drawTable();
 
-        int x = tableWidth / 2;
+        int x = tableWidth / 4;
         int y = tableY + 10;
         int color = DrawUtils.colorFromRGBA(0f, 0f, 0f, 1f);
 

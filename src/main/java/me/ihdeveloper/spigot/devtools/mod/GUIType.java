@@ -4,5 +4,6 @@ public enum GUIType {
     WATCHER,
     TPS,
     PROFILER,
-    SERVER_WALL;
+    SERVER_WALL,
+    LOGGER
 }
