@@ -39,7 +39,9 @@ public abstract class GUIOverlay extends GuiScreen {
         int bottom = height - (height / 32) - TABLE_MARGIN_BOTTOM;
         drawRect(10, top, width - 10, bottom, DrawUtils.colorFromRGBA(0f, 0f, 0f, .4f));
 
-        DrawUtils.drawCenteredText("§eSpigot Dev Tools §6By §c@iHDeveloper", width / 2F, bottom + (TABLE_MARGIN_BOTTOM / 2F), DrawUtils.colorFromRGBA(0, 0, 0, 1));
+        int defaultColor = DrawUtils.colorFromRGBA(0, 0, 0, 1);
+        DrawUtils.drawCenteredText("§eSpigot Dev Tools §6By §c@iHDeveloper", width / 2F, bottom + (TABLE_MARGIN_BOTTOM / 2F), defaultColor);
+        DrawUtils.drawCenteredText("§7Client Version " + Main.protocolMajor + "." + Main.protocolMinor, left + 50F, bottom + (TABLE_MARGIN_BOTTOM / 2F), defaultColor);
 
         this.tableX = left;
         this.tableY = top;
