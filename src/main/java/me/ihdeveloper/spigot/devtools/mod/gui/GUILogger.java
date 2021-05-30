@@ -38,7 +38,7 @@ public class GUILogger extends GUIOverlay {
         int size = logger.all().size();
 
         String header = "§7§oTotal: " + size;
-        drawString(mc.fontRendererObj, header, this.tableX + 5, this.tableY + this.tableHeight - 10, defaultTextColor);
+        drawString(mc.fontRendererObj, header, this.tableX + 5, this.tableY + this.tableHeight - 12, defaultTextColor);
 
         if (size > 0)
             drawMessages();
