@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import java.awt.Color;
 
 public abstract class GUIOverlay extends GuiScreen {
+    private static final int TABLE_MARGIN_BOTTOM = 15;
 
     protected int tableX;
     protected int tableY;
@@ -35,8 +36,10 @@ public abstract class GUIOverlay extends GuiScreen {
         int left = 10;
         int right = width - left;
         int top = ((height / 16) * 3) + 2;
-        int bottom = height - (height / 32);
+        int bottom = height - (height / 32) - TABLE_MARGIN_BOTTOM;
         drawRect(10, top, width - 10, bottom, DrawUtils.colorFromRGBA(0f, 0f, 0f, .4f));
+
+        DrawUtils.drawCenteredText("§eSpigot Dev Tools §6By §c@iHDeveloper", width, bottom + (TABLE_MARGIN_BOTTOM / 2F), DrawUtils.colorFromRGBA(0, 0, 0, 1));
 
         this.tableX = left;
         this.tableY = top;
