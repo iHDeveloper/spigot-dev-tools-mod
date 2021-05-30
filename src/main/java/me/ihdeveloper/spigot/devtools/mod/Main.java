@@ -28,10 +28,10 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.EnumMap;
 
-@Mod(modid = "spigot-dev-tools", version = "0.2.1")
+@Mod(modid = "spigot-dev-tools", version = "0.3")
 public class Main {
     public static final byte protocolMajor = 0;
-    public static final byte protocolMinor = 2;
+    public static final byte protocolMinor = 3;
 
     private static Main instance;
 
