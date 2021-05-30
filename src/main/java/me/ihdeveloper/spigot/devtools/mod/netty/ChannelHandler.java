@@ -39,6 +39,17 @@ public class ChannelHandler extends SimpleChannelInboundHandler<FMLProxyPacket> 
             return;
         }
 
+        if (type.equals("discovery")) {
+            try {
+                byte major = in.readByte();
+                byte minor = in.readByte();
+                Main.getInstance().getContainer().setProtocol(major, minor);
+            } catch (IOException exception) {
+                Debug.error("Failed to read discovery data! §7(" + exception.getMessage() + ")");
+                exception.printStackTrace();
+            }
+        }
+
         if (type.equals("hello")) {
             Main.getInstance().getContainer().setAuthState(AuthState.AUTHORIZED);
         } else if (type.equals("watcher-put")) {

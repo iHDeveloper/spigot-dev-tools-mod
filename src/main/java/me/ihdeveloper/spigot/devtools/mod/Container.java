@@ -11,6 +11,9 @@ public class Container {
     private final ServerWall serverWall = new ServerWall();
     private final double[] recentTPS = new double[3];
     private AuthState authState = AuthState.NOT_REQUESTED;
+    private boolean discovered = false;
+    private byte supportedMajor = 0;
+    private byte supportedMinor = 0;
 
     public void setAuthState(AuthState authState) {
         this.authState = authState;
@@ -40,4 +43,21 @@ public class Container {
         return recentTPS[index];
     }
 
+    public void setProtocol(byte major, byte minor) {
+        this.discovered = true;
+        this.supportedMajor = major;
+        this.supportedMinor = minor;
+    }
+
+    public byte getSupportedMajor() {
+        return supportedMajor;
+    }
+
+    public byte getSupportedMinor() {
+        return supportedMinor;
+    }
+
+    public boolean isDiscovered() {
+        return discovered;
+    }
 }

@@ -1,6 +1,7 @@
 package me.ihdeveloper.spigot.devtools.mod.utils;
 
 import me.ihdeveloper.spigot.devtools.mod.AuthState;
+import me.ihdeveloper.spigot.devtools.mod.Main;
 import net.minecraft.client.gui.ScaledResolution;
 
 import java.awt.Color;
@@ -29,6 +30,21 @@ public class RenderUtils {
         }
 
         DrawUtils.drawCenteredText(status, (width * 2f) - 100f, height - 40f, color.getRGB());
+    }
+
+    public static void renderDiscovery(ScaledResolution scaledResolution, boolean discovered, byte major, byte minor) {
+        int height = scaledResolution.getScaledHeight();
+        int width = scaledResolution.getScaledWidth();
+
+        String status;
+        if (discovered) {
+            boolean compatible = (Main.protocolMajor == major && Main.protocolMinor >= minor);
+            status = "§2Discovered! §ev§" + (compatible ? '6' : 'c') + major + "." + minor;
+        } else {
+            status = "§4Not Discovered";
+        }
+
+        DrawUtils.drawCenteredText(status, (width * 2f) - 100f, height - 20f, DrawUtils.colorFromRGBA(0, 0, 0, 1));
     }
 
     public static void renderTPS(ScaledResolution scaledResolution, double tps) {
